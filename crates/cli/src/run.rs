@@ -44,7 +44,9 @@ pub fn run<S: Read + Write>(stream: &mut S, request: &Request, format: Format) -
             ExitCode::from(FAILED)
         }
         Err(wire::Error::Closed) => {
-            eprintln!("whis-beats: the running WHIS BEATS did not answer; it may be older, restart it");
+            eprintln!(
+                "whis-beats: the running WHIS BEATS did not answer; it may be older, restart it"
+            );
             ExitCode::from(FAILED)
         }
         Err(error) => {
@@ -197,7 +199,8 @@ fn describe(failure: &Failure) -> String {
     match failure {
         Failure::Version(v) => format!("the running WHIS BEATS speaks protocol {v}; restart it"),
         Failure::Malformed => {
-            "the running WHIS BEATS could not read the command; if it is older, restart it".to_owned()
+            "the running WHIS BEATS could not read the command; if it is older, restart it"
+                .to_owned()
         }
         Failure::Unsupported => "this command is not supported yet".to_owned(),
         Failure::SignedOut => "no provider is signed in".to_owned(),

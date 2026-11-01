@@ -54,9 +54,7 @@ macro_rules! member {
     };
 }
 
-const MEMBERS: [Member; 1] = [
-    member!("NamanGaonkar", Role::LeadMaintainer),
-];
+const MEMBERS: [Member; 1] = [member!("NamanGaonkar", Role::LeadMaintainer)];
 
 impl SettingsView {
     pub(super) fn about_groups(&self) -> Vec<Group> {
