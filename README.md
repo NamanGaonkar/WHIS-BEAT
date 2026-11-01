@@ -4,9 +4,9 @@
 
 # WHIS BEATS
 
-### The Ultimate Native Music Streaming & Local Playback Client, Built with Rust and GPUI
+### The Ultimate Native Music Streaming & Local Playback Client for Windows 10 & 11, Built with Rust and GPUI
 
-Stream from your favorite services and play local files — all in one blazingly fast **native** desktop app.
+Stream from your favorite services and play local files — all in one blazingly fast **native** Windows desktop app.
 
 [![License](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](./COPYING)
 [![Developer](https://img.shields.io/badge/developer-Naman%20Gaonkar-black?logo=github)](https://github.com/NamanGaonkar)
@@ -55,22 +55,25 @@ Stream from your favorite services and play local files — all in one blazingly
 - Scrobbling with LastFM, ListenBrainz, LibreFM, and Maloja
 - Themes, fonts, icons, transparency, blur, and window styling
 - Discord Rich Presence, native file opening
-- Windows, macOS, Linux, and FreeBSD support
+- Designed and optimized exclusively for Windows 10 and Windows 11 (64-bit)
 - Powerful CLI control integration
 
 ## Installation & Releases
 
 Download the latest version from our [Releases page](https://github.com/NamanGaonkar/WHIS-BEAT/releases).
 
-### Windows
+### Windows (64-bit)
 
-Download the latest release executable or installer from [Releases](https://github.com/NamanGaonkar/WHIS-BEAT/releases).
+Download the latest Windows installer or standalone portable executable:
+- **Installer (Recommended):** `WHIS-BEATS-Setup.exe`
+- **Standalone Binary:** `whis-beats-vX.Y.Z-x86_64-pc-windows-msvc.exe` (or rename to `whis-beats.exe`)
 
-### Building From Source
+### Building From Source (Windows)
 
 Prerequisites:
-- [Rust toolchain](https://rustup.rs/) (stable, 1.80+)
-- C/C++ build tools (MSVC on Windows, Xcode on macOS, build-essential on Linux)
+- [Rust toolchain](https://rustup.rs/) (stable, 1.80+ with `x86_64-pc-windows-msvc`)
+- Visual Studio C++ Build Tools (MSVC)
+- [Inno Setup 6](https://jrsoftware.org/isdl.php) (optional, for packaging the installer)
 
 ```sh
 # Clone the repository
