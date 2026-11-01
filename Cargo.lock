@@ -7302,51 +7302,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "sonora"
-version = "0.46.0"
-dependencies = [
- "anyhow",
- "block2 0.6.2",
- "cli",
- "dirs",
- "embed",
- "env_logger",
- "futures",
- "gpui",
- "gpui_platform",
- "i18n",
- "icons",
- "image",
- "input",
- "interprocess",
- "ksni",
- "libc",
- "log",
- "music",
- "objc2 0.6.4",
- "objc2-app-kit 0.3.2",
- "objc2-foundation 0.3.2",
- "raw-window-handle",
- "reqwest 0.13.4",
- "resvg",
- "router",
- "rustls 0.23.43",
- "sha2",
- "state",
- "storage",
- "tokio",
- "tray-icon",
- "ui",
- "views",
- "webview",
- "widestring",
- "windows 0.62.2",
- "windows-sys 0.61.2",
- "winresource",
- "zbus",
-]
-
-[[package]]
 name = "souvlaki"
 version = "0.8.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -9299,6 +9254,51 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bae2f2b2b816647a1cab1acc91f5bd20812d53cb344382635ec2181940c8034f"
 dependencies = [
  "libc",
+]
+
+[[package]]
+name = "whis-beats"
+version = "0.46.0"
+dependencies = [
+ "anyhow",
+ "block2 0.6.2",
+ "cli",
+ "dirs",
+ "embed",
+ "env_logger",
+ "futures",
+ "gpui",
+ "gpui_platform",
+ "i18n",
+ "icons",
+ "image",
+ "input",
+ "interprocess",
+ "ksni",
+ "libc",
+ "log",
+ "music",
+ "objc2 0.6.4",
+ "objc2-app-kit 0.3.2",
+ "objc2-foundation 0.3.2",
+ "raw-window-handle",
+ "reqwest 0.13.4",
+ "resvg",
+ "router",
+ "rustls 0.23.43",
+ "sha2",
+ "state",
+ "storage",
+ "tokio",
+ "tray-icon",
+ "ui",
+ "views",
+ "webview",
+ "widestring",
+ "windows 0.62.2",
+ "windows-sys 0.61.2",
+ "winresource",
+ "zbus",
 ]
 
 [[package]]
