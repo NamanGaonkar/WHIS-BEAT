@@ -1117,11 +1117,11 @@ fn footprint(path: &Path) -> u64 {
         .sum()
 }
 
-/// Sonora's downloads folder, `$XDG_DATA_HOME/sonora/downloads`.
+/// WHIS BEATS's downloads folder, `$XDG_DATA_HOME/whis-beats/downloads`.
 fn pinned_root() -> PathBuf {
     dirs::data_local_dir()
         .unwrap_or_else(std::env::temp_dir)
-        .join("sonora")
+        .join("whis-beats")
         .join("downloads")
 }
 

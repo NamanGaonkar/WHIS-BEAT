@@ -6,13 +6,13 @@ use gpui::{App, AssetSource, SharedString};
 include!(concat!(env!("OUT_DIR"), "/fonts.rs"));
 
 /// Where About asks for the app icon, and the icon this platform shows for the app.
-const APP_ICON: &str = "brand/sonora.svg";
+const APP_ICON: &str = "brand/whis-beats.svg";
 #[cfg(target_os = "macos")]
-const APP_ICON_SVG: &[u8] = include_bytes!("../../../assets/macos/sonora.svg");
+const APP_ICON_SVG: &[u8] = include_bytes!("../../../assets/macos/whis-beats.svg");
 #[cfg(target_os = "windows")]
-const APP_ICON_SVG: &[u8] = include_bytes!("../../../assets/windows/sonora.svg");
+const APP_ICON_SVG: &[u8] = include_bytes!("../../../assets/windows/whis-beats.svg");
 #[cfg(not(any(target_os = "macos", target_os = "windows")))]
-const APP_ICON_SVG: &[u8] = include_bytes!("../../../assets/linux/sonora.svg");
+const APP_ICON_SVG: &[u8] = include_bytes!("../../../assets/linux/whis-beats.svg");
 
 pub struct Assets;
 

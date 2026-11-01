@@ -184,5 +184,16 @@ fn write_file(master: &[u8]) -> Result<()> {
 /// The key file sits in the data folder rather than in the cache folder, so clearing or copying
 /// the cache alone never carries the key with it. The downloads share the data folder.
 fn key_file() -> Option<PathBuf> {
-    Some(dirs::data_local_dir()?.join("sonora").join("vault.key"))
+    let base = dirs::data_local_dir()?;
+    let new_path = base.join("whis-beats").join("vault.key");
+    if !new_path.exists() {
+        let old_path = base.join("sonora").join("vault.key");
+        if old_path.exists() {
+            if let Some(parent) = new_path.parent() {
+                let _ = std::fs::create_dir_all(parent);
+            }
+            let _ = std::fs::copy(&old_path, &new_path);
+        }
+    }
+    Some(new_path)
 }

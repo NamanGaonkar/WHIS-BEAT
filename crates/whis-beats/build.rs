@@ -9,7 +9,7 @@ fn main() {
     {
         let icon = concat!(
             env!("CARGO_MANIFEST_DIR"),
-            "/../../assets/windows/sonora.ico"
+            "/../../assets/windows/whis-beats.ico"
         );
         println!("cargo:rerun-if-changed={icon}");
         let mut resource = winresource::WindowsResource::new();

@@ -25,16 +25,16 @@ static WRITES: AtomicU64 = AtomicU64::new(0);
 /// Runs the move out of the cache folder once per process, before the first provider looks.
 static MIGRATION: Once = Once::new();
 
-/// Sonora's cache root, `$XDG_CACHE_HOME/sonora`, falling back to the temp dir. It holds only
-/// what Sonora can fetch again, since cleaners and the system are free to empty it.
+/// WHIS BEATS's cache root, `$XDG_CACHE_HOME/whis-beats`, falling back to the temp dir. It holds only
+/// what WHIS BEATS can fetch again, since cleaners and the system are free to empty it.
 pub(crate) fn root() -> PathBuf {
     dirs::cache_dir()
         .unwrap_or_else(std::env::temp_dir)
-        .join("sonora")
+        .join("whis-beats")
 }
 
-/// A provider's own accounts folder, named by its slug, under `$XDG_DATA_HOME/sonora/accounts`.
-/// The first call in a process moves the sign-ins an older Sonora left in the cache folder.
+/// A provider's own accounts folder, named by its slug, under `$XDG_DATA_HOME/whis-beats/accounts`.
+/// The first call in a process moves the sign-ins an older installation left in the cache folder.
 pub(crate) fn dir(slug: &str) -> PathBuf {
     MIGRATION.call_once(migrate);
     accounts().join(slug)
@@ -107,12 +107,12 @@ pub(crate) fn remove(path: &Path) {
 fn accounts() -> PathBuf {
     dirs::data_local_dir()
         .unwrap_or_else(std::env::temp_dir)
-        .join("sonora")
+        .join("whis-beats")
         .join("accounts")
 }
 
 /// Moves every file in [`MOVED`] from the cache folder into the accounts folder. A file already
-/// in the accounts folder wins unless the cached one is newer, as after a run of an older Sonora.
+/// in the accounts folder wins unless the cached one is newer.
 /// The cached copy is deleted once the accounts folder has a current one, and a file that cannot
 /// move stays where it is for the next launch to try again.
 fn migrate() {
@@ -140,6 +140,24 @@ fn migrate() {
             remove(&from);
         }
         std::fs::remove_dir(old.join(slug)).ok();
+    }
+
+    // Also migrate from legacy "sonora/accounts" if present
+    if let Some(base) = dirs::data_local_dir() {
+        let legacy = base.join("sonora").join("accounts");
+        if legacy.exists() {
+            for (slug, files) in MOVED {
+                for name in *files {
+                    let from = legacy.join(slug).join(name);
+                    let to = new.join(slug).join(name);
+                    if from.exists() && !to.exists() {
+                        if let Ok(body) = std::fs::read(&from) {
+                            let _ = write(&to, &body);
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

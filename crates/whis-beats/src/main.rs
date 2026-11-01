@@ -126,7 +126,7 @@ fn main() -> ExitCode {
             Arc::new(music::local::LocalProvider::new(
                 dirs::cache_dir()
                     .unwrap_or_else(std::env::temp_dir)
-                    .join("sonora"),
+                    .join("whis-beats"),
                 database.clone(),
                 storage::Cache::standard(),
             ));

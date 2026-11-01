@@ -279,7 +279,7 @@ fn image(art: Option<String>, badge: Option<&'static str>, cx: &gpui::App) -> Di
             .bg(rgb(APP_ICON))
             .child(
                 svg()
-                    .path(icons::path("icons/sonora.svg"))
+                    .path(icons::path("icons/whis-beats.svg"))
                     .size(ART * APP_MARK_SHARE)
                     .text_color(rgb(APP_MARK)),
             )

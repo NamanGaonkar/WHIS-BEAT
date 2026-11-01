@@ -224,12 +224,12 @@ fn begin_environment(
     .context("cannot start the WebView2 environment")
 }
 
-/// Sonora's own cache folder for WebView2's browser state, as a wide string. WebView2 otherwise
+/// WHIS BEATS's own cache folder for WebView2's browser state, as a wide string. WebView2 otherwise
 /// writes beside the executable, which an installed copy under Program Files cannot do.
 fn user_data_folder() -> Result<Vec<u16>> {
     let folder = dirs::cache_dir()
         .unwrap_or_else(std::env::temp_dir)
-        .join("sonora")
+        .join("whis-beats")
         .join("webview2");
     std::fs::create_dir_all(&folder)
         .with_context(|| format!("cannot create {}", folder.display()))?;

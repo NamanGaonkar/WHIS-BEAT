@@ -2768,7 +2768,7 @@ fn absolute_path(path: &Path) -> PathBuf {
         .unwrap_or_else(|_| path.to_owned())
 }
 
-/// Keeps the previous valid settings in `sonora.backup.json` before saving a new version.
+/// Keeps the previous valid settings in `whis-beats.backup.json` before saving a new version.
 /// Unchanged saves and empty or broken previous files leave the backup alone. The caller must
 /// check that `previous` still matches the last contents it accepted from disk.
 fn save_settings(path: &Path, bytes: &[u8], previous: Option<&[u8]>) -> Result<()> {
@@ -2778,7 +2778,7 @@ fn save_settings(path: &Path, bytes: &[u8], previous: Option<&[u8]>) -> Result<(
     if let Some(previous) =
         previous.filter(|previous| serde_json::from_slice::<Values>(json(previous)).is_ok())
     {
-        write_settings(&path.with_file_name("sonora.backup.json"), previous)
+        write_settings(&path.with_file_name("whis-beats.backup.json"), previous)
             .context("cannot back up settings")?;
     }
     write_settings(path, bytes)
@@ -2836,10 +2836,18 @@ fn write_settings(path: &Path, bytes: &[u8]) -> Result<()> {
 }
 
 fn settings_path() -> PathBuf {
-    dirs::config_dir()
-        .unwrap_or_else(|| PathBuf::from("."))
-        .join("sonora")
-        .join("settings.json")
+    let base = dirs::config_dir().unwrap_or_else(|| PathBuf::from("."));
+    let new_path = base.join("whis-beats").join("settings.json");
+    if !new_path.exists() {
+        let old_path = base.join("sonora").join("settings.json");
+        if old_path.exists() {
+            if let Some(parent) = new_path.parent() {
+                let _ = fs::create_dir_all(parent);
+            }
+            let _ = fs::copy(&old_path, &new_path);
+        }
+    }
+    new_path
 }
 
 /// The pins of the given providers, in stored order.

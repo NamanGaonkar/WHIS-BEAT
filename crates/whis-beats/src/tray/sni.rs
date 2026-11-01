@@ -8,7 +8,7 @@ use super::{Art, Event, Shown};
 
 const ID: &str = "whis-beats";
 const ICON_NAME: &str = "whis-beats";
-const PNG: &[u8] = include_bytes!("../../../../assets/tray/sonora.png");
+const PNG: &[u8] = include_bytes!("../../../../assets/tray/whis-beats.png");
 /// Flatpak writes this file into every sandbox it starts.
 const FLATPAK_INFO: &str = "/.flatpak-info";
 const WATCHER: &str = "org.kde.StatusNotifierWatcher";

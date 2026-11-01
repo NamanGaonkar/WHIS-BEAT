@@ -225,12 +225,12 @@ fn gmp(profile: &Path) -> Option<PathBuf> {
     path.is_file().then_some(path)
 }
 
-/// Sonora's own folder for the module, `$XDG_CACHE_HOME/sonora/widevine`, holding one
+/// WHIS BEATS's own folder for the module, `$XDG_CACHE_HOME/whis-beats/widevine`, holding one
 /// subfolder per version fetched.
 pub fn store() -> PathBuf {
     dirs::cache_dir()
         .unwrap_or_else(std::env::temp_dir)
-        .join("sonora")
+        .join("whis-beats")
         .join("widevine")
 }
 

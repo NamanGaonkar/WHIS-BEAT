@@ -753,7 +753,7 @@ settings-discord-preview-elapsed = Uplynulo { $time }
 settings-discord-preview-listen-on = Poslouchat na { $provider }
 # the Discord status when the track is left out of it
 discord-listening = Poslouchá hudbu
-get-sonora = Získat Sonoru
+get-sonora = Získat WHIS BEATS
 settings-fullscreen-controls-autohide-automatic = Automaticky
 settings-fullscreen-controls-autohide-always-hidden = Vždy skryté
 settings-fullscreen-controls-autohide-always-shown = Vždy zobrazené

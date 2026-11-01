@@ -90,9 +90,16 @@ pub struct Database {
 
 impl Database {
     pub fn standard() -> Self {
-        let data = dirs::data_local_dir()
-            .unwrap_or_else(std::env::temp_dir)
-            .join("sonora");
+        let base = dirs::data_local_dir().unwrap_or_else(std::env::temp_dir);
+        let data = base.join("whis-beats");
+        if !data.exists() {
+            let legacy = base.join("sonora");
+            if legacy.exists() {
+                let _ = std::fs::create_dir_all(&data);
+                let _ = std::fs::copy(legacy.join("state.sqlite"), data.join("state.sqlite"));
+                let _ = std::fs::copy(legacy.join("library.sqlite3"), data.join("library.sqlite3"));
+            }
+        }
         Self {
             path: data.join("state.sqlite"),
             ready: Arc::new(Mutex::new(false)),

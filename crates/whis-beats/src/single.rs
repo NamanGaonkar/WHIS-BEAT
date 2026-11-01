@@ -10,8 +10,8 @@ use tokio::sync::mpsc::{self, UnboundedSender};
 use tokio::sync::oneshot;
 
 const SOCKET: &str = match cfg!(debug_assertions) {
-    true => "sonora-dev.sock",
-    false => "sonora.sock",
+    true => "whis-beats-dev.sock",
+    false => "whis-beats.sock",
 };
 /// How long the running Sonora waits for a connection to say what it wants, so a stalled peer
 /// never holds a thread for good.
@@ -224,7 +224,7 @@ fn private_dir() -> io::Result<std::path::PathBuf> {
         (Some(runtime), None) => return Ok(runtime),
         (None, _) => dirs::cache_dir()
             .ok_or_else(|| io::Error::new(ErrorKind::NotFound, "no runtime or cache folder"))?
-            .join("sonora"),
+            .join("whis-beats"),
     };
     std::fs::DirBuilder::new()
         .recursive(true)
