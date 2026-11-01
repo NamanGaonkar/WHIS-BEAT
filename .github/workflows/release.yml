@@ -42,11 +42,11 @@ jobs:
           - target: x86_64-pc-windows-msvc
             os: windows-latest
             arch: x64compatible
-            setup: WHIS BEATS-Setup
+            setup: WHIS-BEATS-Setup
           - target: aarch64-pc-windows-msvc
             os: windows-11-arm
             arch: arm64
-            setup: WHIS BEATS-Setup-arm64
+            setup: WHIS-BEATS-Setup-arm64
     steps:
       - uses: actions/checkout@v5
 
@@ -203,34 +203,34 @@ jobs:
           set -euo pipefail
 
           mkdir -p \
-            WHIS BEATS.app/Contents/MacOS \
-            WHIS BEATS.app/Contents/Resources
+            "WHIS BEATS.app/Contents/MacOS" \
+            "WHIS BEATS.app/Contents/Resources"
 
           lipo -create \
-            -output WHIS BEATS.app/Contents/MacOS/whis-beats \
+            -output "WHIS BEATS.app/Contents/MacOS/whis-beats" \
             darwin/whis-beats-aarch64-apple-darwin \
             darwin/whis-beats-x86_64-apple-darwin
-          chmod +x WHIS BEATS.app/Contents/MacOS/whis-beats
-          lipo -info WHIS BEATS.app/Contents/MacOS/whis-beats
+          chmod +x "WHIS BEATS.app/Contents/MacOS/whis-beats"
+          lipo -info "WHIS BEATS.app/Contents/MacOS/whis-beats"
 
           cp \
             assets/macos/whis-beats.icns \
-            WHIS BEATS.app/Contents/Resources/
+            "WHIS BEATS.app/Contents/Resources/"
 
           cp \
             COPYING \
-            WHIS BEATS.app/Contents/Resources/LICENSE
+            "WHIS BEATS.app/Contents/Resources/LICENSE"
 
           cp \
             THIRD-PARTY.md \
-            WHIS BEATS.app/Contents/Resources/
+            "WHIS BEATS.app/Contents/Resources/"
 
           cp \
             assets/fonts/LICENSE.txt \
-            WHIS BEATS.app/Contents/Resources/LICENSE.Inter
+            "WHIS BEATS.app/Contents/Resources/LICENSE.Inter"
 
-          mkdir -p WHIS BEATS.app/Contents/Resources/icons
-          cp assets/icons/LICENSE WHIS BEATS.app/Contents/Resources/icons/LICENSE
+          mkdir -p "WHIS BEATS.app/Contents/Resources/icons"
+          cp assets/icons/LICENSE "WHIS BEATS.app/Contents/Resources/icons/LICENSE"
           for licence in assets/icons/*/LICENSE; do
             pack="$(basename "$(dirname "$licence")")"
             cp "$licence" "WHIS BEATS.app/Contents/Resources/icons/LICENSE.$pack"
@@ -239,9 +239,9 @@ jobs:
           sed \
             "s/@VERSION@/$NUMBER/g" \
             assets/macos/Info.plist \
-            > WHIS BEATS.app/Contents/Info.plist
+            > "WHIS BEATS.app/Contents/Info.plist"
 
-          plutil -lint WHIS BEATS.app/Contents/Info.plist
+          plutil -lint "WHIS BEATS.app/Contents/Info.plist"
 
       - name: sign the bundle
         shell: bash
@@ -251,13 +251,13 @@ jobs:
           codesign \
             --force \
             --sign - \
-            WHIS BEATS.app
+            "WHIS BEATS.app"
 
           codesign \
             --verify \
             --strict \
             --verbose=2 \
-            WHIS BEATS.app
+            "WHIS BEATS.app"
 
       - name: create the disk image
         shell: bash
@@ -266,11 +266,11 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p dist staging
-          cp -R WHIS BEATS.app staging/
+          cp -R "WHIS BEATS.app" staging/
           ln -s /Applications staging/Applications
           megabytes=$(du -ms staging | cut -f1)
           hdiutil create \
-            -volname WHIS BEATS \
+            -volname "WHIS BEATS" \
             -srcfolder staging \
             -size "$((megabytes + 128))m" \
             -ov \
@@ -591,7 +591,7 @@ jobs:
               site/repo "$bundle"
           done
           flatpak build-update-repo \
-            --title=WHIS BEATS \
+            --title="WHIS BEATS" \
             --generate-static-deltas \
             --prune \
             --prune-depth=3 \
