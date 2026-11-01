@@ -108,10 +108,12 @@ jobs:
       - name: checksums
         shell: pwsh
         run: |
-          Get-ChildItem dist\* | ForEach-Object {
-            $hash = (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLower()
-            "$hash  $($_.Name)"
-          } | Out-File -FilePath dist\SHA256SUMS -Encoding ascii
+          $files = Get-ChildItem dist\* -File | Where-Object { $_.Name -ne "SHA256SUMS" }
+          $hashes = foreach ($f in $files) {
+            $hash = (Get-FileHash $f.FullName -Algorithm SHA256).Hash.ToLower()
+            "$hash  $($f.Name)"
+          }
+          $hashes | Out-File -FilePath dist\SHA256SUMS -Encoding ascii
 
       - name: release notes
         shell: bash
