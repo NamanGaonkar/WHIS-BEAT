@@ -1,6 +1,6 @@
 param(
     [string]$Version = "0.0.0",
-    [string]$Executable = "target/release/sonora.exe",
+    [string]$Executable = "target/release/whis-beats.exe",
     [string]$Output = "dist"
 )
 
@@ -18,11 +18,19 @@ if (-not $iscc) {
     throw "Inno Setup 6 is not installed"
 }
 
-$env:SONORA_VERSION = $Version.TrimStart("v")
-$env:SONORA_EXE = $source.Path
-$env:SONORA_DIST = (Resolve-Path $outputPath).Path
+$env:WHIS_BEATS_VERSION = $Version.TrimStart("v")
+$env:WHIS_BEATS_EXE = $source.Path
+$env:WHIS_BEATS_DIST = (Resolve-Path $outputPath).Path
+$env:WHIS_BEATS_ARCH = "x64compatible"
+$env:WHIS_BEATS_SETUP = "WHIS-BEATS-Setup"
 
-& $iscc (Join-Path $PSScriptRoot "sonora.iss")
+$env:SONORA_VERSION = $env:WHIS_BEATS_VERSION
+$env:SONORA_EXE = $env:WHIS_BEATS_EXE
+$env:SONORA_DIST = $env:WHIS_BEATS_DIST
+$env:SONORA_ARCH = $env:WHIS_BEATS_ARCH
+$env:SONORA_SETUP = $env:WHIS_BEATS_SETUP
+
+& $iscc (Join-Path $PSScriptRoot "whis-beats.iss")
 if ($LASTEXITCODE -ne 0) {
     throw "Inno Setup failed with exit code $LASTEXITCODE"
 }
